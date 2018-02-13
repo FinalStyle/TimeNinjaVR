@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GestureSystem : MonoBehaviour {
-
+public class GestureSystem : MonoBehaviour
+{
+    WandController[] controllers;
 	// Use this for initialization
 	void Start () {
 		
