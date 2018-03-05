@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    public Transform head;
     public WandController[] wands;
     public float minWalkMovementPerFrame;
     public float minJumpMovementPerFrame;
@@ -51,12 +52,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Walk()
     {
-        _rb.AddForce(new Vector3(0, jumpForce, 0));
+        print("walk");
+        _rb.AddForce(walkForce * new Vector3(head.forward.x, 0, head.forward.z));
     }
 
     private void Jump()
     {
-        _rb.AddForce(new Vector3(jumpForce, 0, 0));
+        _rb.AddForce(new Vector3(0, jumpForce, 0));
     }
 
     private bool OverThresholdWalk()
@@ -97,6 +99,6 @@ public class PlayerMovement : MonoBehaviour
         firstDirection = WandMovementVector[0].normalized.y;
         secondDirection = WandMovementVector[1].normalized.y;
 
-        return (Mathf.Sign(firstDirection) == Mathf.Sign(secondDirection));
+        return firstDirection < 0 && secondDirection < 0;
     }
 }
